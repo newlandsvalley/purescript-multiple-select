@@ -1,9 +1,10 @@
 module App  where
 
 import MultipleSelect (Event, State, foldp, initialState, view) as MS
-import Dom.SelectElement (DOM)
+import MultipleSelect.Dom (DOM)
 
 import Prelude (discard, ($), (#))
+import Data.List (List(..), (:))
 import Pux.DOM.HTML (HTML, child)
 import Text.Smolder.HTML (div, h1)
 import Text.Smolder.Markup (Attribute, text, (!))
@@ -20,23 +21,23 @@ type State = {
   instrumentChoices :: MS.State
 }
 
-instruments :: Array String
+instruments :: List String
 instruments =
-  [ "acoustic_grand_piano"
-  , "cello"
-  , "harpsichord"
-  , "marimba"
-  , "trombone"
-  , "trumpet"
-  , "vibraphone"
-  , "viola"
-  , "violin"
-  ]
+    "acoustic_grand_piano"
+  : "cello"
+  : "harpsichord"
+  : "marimba"
+  : "trombone"
+  : "trumpet"
+  : "vibraphone"
+  : "viola"
+  : "violin"
+  : Nil
 
 initialState :: State
 initialState =
   {
-    instrumentChoices : MS.initialState "add an instrument" "Instrument Palette:" instruments
+    instrumentChoices : MS.initialState "add an instrument" instruments
   }
 
 foldp :: ∀ fx. Event -> State -> EffModel State Event (dom :: DOM | fx)

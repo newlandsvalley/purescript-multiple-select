@@ -1,4 +1,4 @@
-module Dom.SelectElement
+module MultipleSelect.Dom
   ( DOM
   , resetDefaultSelected ) where
 

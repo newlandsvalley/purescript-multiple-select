@@ -3,6 +3,7 @@
 /.pulp-cache/
 /output/
 /generated-docs/
+/dist/*.js
 /.psc*
 /.purs*
 /.psa*

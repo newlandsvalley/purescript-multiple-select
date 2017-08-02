@@ -5,16 +5,16 @@ import Prelude (bind, const, discard, pure, ($), (/=))
 import Pux (EffModel, noEffects)
 import Pux.DOM.Events (onClick, onChange, targetValue)
 import Pux.DOM.HTML (HTML)
-import Text.Smolder.HTML (a, div, label, option, select, span, ul, li)
+import Text.Smolder.HTML (a, div, option, select, span, ul, li)
 import Text.Smolder.HTML.Attributes as At
 import Text.Smolder.Markup (text, (!), (#!), (!?))
-import Data.Array (elem, filter, reverse, (:))
+import Data.List (List(..), elem, filter, reverse, (:))
 import Data.Foldable (traverse_)
 import Data.Maybe (Maybe(..))
 import Control.Monad.Eff.Class (liftEff)
 
 import Pux.DOM.HTML.Attributes (style)
-import Dom.SelectElement
+import MultipleSelect.Dom (DOM, resetDefaultSelected)
 
 -- | An implementation as a Pux module of an autonomus multiple select widget
 -- | The state is initialised with an array of available menu options
@@ -29,17 +29,15 @@ data Event =
 
 type State = {
     instruction :: String          -- the instruction on what to select
-  , label :: String                -- the label (if needed for) the drop down
-  , available :: Array String      -- available options
-  , selected  :: Array String      -- currently selected options
+  , available :: List String       -- available options
+  , selected  :: List String       -- currently selected options
   }
 
-initialState :: String -> String -> Array String -> State
-initialState instruction label available = {
+initialState :: String -> List String -> State
+initialState instruction available = {
     instruction : instruction
-  , label : label
   , available : available
-  , selected : []
+  , selected : Nil
   }
 
 -- foreign import resetDefaultSelected :: forall eff. Unit -> Eff (dom :: DOM | eff) Unit
@@ -71,8 +69,6 @@ addSelectionMenu state =
         (option !? (isDisabled s)) (At.disabled "disabled") $ text s
   in
     do
-      label ! At.for "selection-menu" $ do
-        text state.label
       select  ! At.id "selection-menu"
         #! onChange (\e -> AddSelection (targetValue e) )
           $ do
@@ -80,12 +76,12 @@ addSelectionMenu state =
             traverse_ f state.available
 
 -- | add a selection to the end of the list
-addSelection :: String -> Array String -> Array String
+addSelection :: String -> List String -> List String
 addSelection s ss =
   reverse $ s : (reverse ss)
 
 -- | remove a selection from the list
-removeSelection :: String -> Array String -> Array String
+removeSelection :: String -> List String -> List String
 removeSelection s ss =
   filter ((/=) s) ss
 

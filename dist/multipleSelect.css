@@ -21,26 +21,21 @@ label {
   margin-left: 0;
   padding-left: 0;
   list-style: none;
-  background: #ddd;
+  background: #e6ffb3;
   border: 1px solid #bbb;
-  /* width: 100%; */
   width: 15em;
   margin: 0 0 -1px 0;
   line-height: 1em;
 }
 
 .msListItem:hover {
-  background-color: #e5e5e5;
+  background-color: #d5ff80;
 }
 
 .msListItemLabel {
   /* this is a span that surrounds the text in the item, except for the remove link */
   padding: 5px;
   display: block;
-}
-
-.bsmListItem:hover {
-  background-color: #e5e5e5;
 }
 
 .msListItemRemove {

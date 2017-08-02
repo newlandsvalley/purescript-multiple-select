@@ -5,7 +5,7 @@ import Control.Monad.Eff (Eff)
 import Prelude (Unit, bind)
 import Pux (CoreEffects, start)
 import Pux.Renderer.React (renderToDOM)
-import Dom.SelectElement (DOM)
+import MultipleSelect.Dom (DOM)
 
 -- | Start and render the app
 main :: ∀ fx. Eff (CoreEffects ( dom :: DOM | fx)) Unit

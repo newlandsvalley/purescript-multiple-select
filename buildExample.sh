@@ -1,1 +1,1 @@
-pulp build --src-path example/src --include src --to dist/multiple-select.js
+pulp build --src-path example/src --include src --to dist/multipleSelect.js
