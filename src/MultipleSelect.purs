@@ -93,7 +93,7 @@ viewSelections state =
       li ! At.className "msListItem" $ do
         span ! At.className "msListItemLabel" $ do
           text s
-        a ! At.className "msListItemRemove" ! At.href "#" #! onClick (const $ RemoveSelection s) $ text "remove"
+        a ! At.className "msListItemRemove" #! onClick (const $ RemoveSelection s) $ text "remove"
   in
     ul ! At.className "msList" $ do
       traverse_ f state.selected
