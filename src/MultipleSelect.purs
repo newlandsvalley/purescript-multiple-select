@@ -13,7 +13,6 @@ import Data.Foldable (traverse_)
 import Data.Maybe (Maybe(..))
 import Control.Monad.Eff.Class (liftEff)
 
-import Pux.DOM.HTML.Attributes (style)
 import MultipleSelect.Dom (DOM, resetDefaultSelected)
 
 -- | An implementation as a Pux module of an autonomus multiple select widget
