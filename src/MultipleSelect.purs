@@ -69,7 +69,7 @@ addSelectionMenu state =
         (option !? (isDisabled s)) (At.disabled "disabled") $ text s
   in
     do
-      select  ! At.id "selection-menu"
+      select  ! At.id "selection-menu" ! At.className "msSelect"
         #! onChange (\e -> AddSelection (targetValue e) )
           $ do
             option ! At.selected "selected" ! At.disabled "disabled" $ text state.instruction
