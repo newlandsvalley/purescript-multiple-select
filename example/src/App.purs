@@ -7,7 +7,7 @@ import Prelude (discard, ($), (#))
 import Data.List (List(..), (:))
 import Pux.DOM.HTML (HTML, child)
 import Text.Smolder.HTML (div, h1)
-import Text.Smolder.Markup (Attribute, text, (!))
+import Text.Smolder.Markup (Attribute, attribute, text, (!))
 import Pux (EffModel, noEffects, mapEffects, mapState)
 
 import Pux.DOM.HTML.Attributes (style)
@@ -47,7 +47,6 @@ foldp (InstrumentEvent e) state =
     # mapEffects InstrumentEvent
     # mapState \inst -> state { instrumentChoices = inst }
 
-
 viewInstrumentSelect :: State -> HTML Event
 viewInstrumentSelect state =
   child InstrumentEvent MS.view $ state.instrumentChoices
@@ -55,7 +54,7 @@ viewInstrumentSelect state =
 view :: State -> HTML Event
 view state =
     div $ do
-      h1 ! centreStyle $ text "Test change instruments"
+      h1 ! centreStyle ! (attribute "key" "_title") $ text "Test Multiple Select"
       viewInstrumentSelect state
 
 centreStyle :: Attribute
